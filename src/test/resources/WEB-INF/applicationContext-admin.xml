@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="groovyFlyDS" class="com.groovyfly.common.util.GroovyFlyDS" />
+
+    <!-- Admin Beans (Services) -->
+
+    <bean id="lookupService" class="com.groovyfly.common.service.LookupServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <bean id="productService" class="com.groovyfly.admin.service.productmanagement.ProductServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <bean id="productManagementReportingService" class="com.groovyfly.admin.service.productmanagement.ProductManagementReportingServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <bean id="urlManagerService" class="com.groovyfly.admin.service.configuration.UrlManagerServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <bean id="supplierService" class="com.groovyfly.admin.service.productmanagement.SupplierServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <bean id="categoryService" class="com.groovyfly.admin.service.productmanagement.CategoryServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>    
+
+    <bean id="financeService" class="com.groovyfly.admin.service.finance.FinanceServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>  
+      
+    <!-- sales -->
+    
+    <bean id="discountsService" class="com.groovyfly.admin.service.sales.DiscountsServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <bean id="ordersService" class="com.groovyfly.admin.service.sales.OrdersServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <!-- configuration -->
+    
+    <bean id="configurationService" class="com.groovyfly.admin.service.configuration.ConfigurationServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <!-- postage -->
+    
+    <bean id="postageService" class="com.groovyfly.admin.service.postage.PostageServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>      
+    
+    <!-- Actions -->
+    
+    <bean id="springManagedProductManagementAction" class="com.groovyfly.admin.actions.productmanagement.ProductManagementAction" scope="prototype">
+        <property name="ProductManagementReportingServiceIF" ref="productManagementReportingService" />
+    </bean>
+    
+    <bean id="springManagedProductAction" class="com.groovyfly.admin.actions.productmanagement.ProductAction" scope="prototype">
+        <property name="productServiceIF" ref="productService" />
+        <property name="supplierServiceIF" ref="supplierService" />
+        <property name="categoryServiceIF" ref="categoryService" />
+        <property name="financeServiceIF" ref="financeService" />
+        <property name="urlManagerServiceIF" ref="urlManagerService" />
+    </bean>
+    
+	<bean id="springManagedSupplierAction" class="com.groovyfly.admin.actions.productmanagement.SupplierAction" scope="prototype">
+		<property name="supplierServiceIF" ref="supplierService" />
+		<property name="lookupServiceIF" ref="lookupService" />
+	</bean>
+	
+	<bean id="springManagedCategoryAction" class="com.groovyfly.admin.actions.productmanagement.CategoryAction" scope="prototype">
+        <property name="categoryServiceIF" ref="categoryService" />
+        <property name="urlManagerServiceIF" ref="urlManagerService" />
+    </bean>
+    
+    <bean id="springManagedGroupingAction" class="com.groovyfly.admin.actions.productmanagement.GroupingAction" scope="prototype">
+        <property name="productServiceIF" ref="productService" />
+        <property name="categoryServiceIF" ref="categoryService" />
+        <property name="urlManagerServiceIF" ref="urlManagerService" />
+    </bean>
+    
+    <bean id="royalMailPostageCalculator" class="com.groovyfly.admin.postage.RoyalMailPostageCalculator" scope="prototype">
+       <property name="postageServiceIF" ref="postageService" />
+    </bean>
+    
+</beans>

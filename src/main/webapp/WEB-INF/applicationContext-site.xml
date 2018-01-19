@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Spring auto wires beans by default. All you have to do is put a bean in here with an id with the same name of 
+    the class and spring will take care of the rest -->
+<!-- 
+    5 types of bean scopes supported :
+
+    singleton – Return a single bean instance per Spring IoC container
+    prototype – Return a new bean instance each time when requested
+    request – Return a single bean instance per HTTP request. *
+    session – Return a single bean instance per HTTP session. *
+    globalSession – Return a single bean instance per global HTTP session. * -->    
+    
+<!-- In general we want to have all our Interceptors and actions as prototype as we don't want to have any state
+    saved between requests. We want our impl classes i.e. those classes where database connection is injected to be singletons as
+    getting a database connection is expensive. We should remember not to save any state in these. -->
+ 
+<!-- see http://www.mkyong.com/spring/spring-bean-scopes-examples/ -->
+     
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" default-lazy-init="true">
+
+    <!-- Site Beans -->
+    
+    <bean id="cache" class="com.groovyfly.common.util.cache.CacheSyncGAE" />
+    
+    <bean id="commonSiteService" class="com.groovyfly.site.service.CommonSiteServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+       <property name="cacheIF" ref="cache" />
+       <property name="categoryServiceIF" ref="categoryService" />
+    </bean>
+    
+    <bean id="subscriptionService" class="com.groovyfly.site.service.SubscriptionServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <bean id="newsFeedService" class="com.groovyfly.site.service.feed.NewsFeedServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+        
+    <bean id="commentsAndRatingService" class="com.groovyfly.site.service.CommentsAndRatingServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <bean id="shoppingService" class="com.groovyfly.site.service.shopping.ShoppingServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <bean id="collectionService" class="com.groovyfly.admin.service.collection.CollectionServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <bean id="linkDirectoryService" class="com.groovyfly.site.service.linkdirectory.LinkDirectoryServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    <bean id="customerSuggestionService" class="com.groovyfly.site.service.datacollection.CustomerSuggestionServiceImpl">
+       <property name="groovyFlyDS" ref="groovyFlyDS" />
+    </bean>
+    
+    
+    <!-- Interceptors -->
+    
+    <bean id="baseSiteInterceptor" class="com.groovyfly.site.interceptor.BaseSiteInterceptor" scope="prototype">
+        <property name="commonSiteServiceIF" ref="commonSiteService" />
+    </bean>
+    
+    <!-- Common Site Actions -->
+    
+    <bean id="springManagedHomePageAction" class="com.groovyfly.site.actions.HomePageAction" scope="prototype" />
+    
+    <bean id="springManagedNewsletterSubscribeAction" class="com.groovyfly.site.actions.NewsletterSubscribeAction" scope="prototype">
+        <property name="subscriptionServiceIF" ref="subscriptionService" />
+    </bean>
+    
+    <bean id="springManagedNewsFeedAction" class="com.groovyfly.site.actions.feed.NewsFeedAction" scope="prototype">
+        <property name="newsFeedServiceIF" ref="newsFeedService" />
+    </bean>
+    
+    <bean id="springManagedLinksAction" class="com.groovyfly.site.actions.LinksAction" scope="prototype">
+        <property name="linkDirectoryServiceIF" ref="linkDirectoryService" />
+    </bean>
+    
+    <!-- Link Directory Actions -->
+
+    <bean id="springManagedLinkDirectoryAction" class="com.groovyfly.site.actions.directory.LinkDirectoryAction" scope="prototype">
+        <property name="linkDirectoryServiceIF" ref="linkDirectoryService" />
+    </bean>
+
+    <!-- Shopping Actions -->    
+    
+    <bean id="springManagedSiteCategoryAction" class="com.groovyfly.site.actions.shopping.CategoryAction" scope="prototype">
+         <property name="categoryServiceIF" ref="categoryService" />
+         <property name="productServiceIF" ref="productService" />
+    </bean>
+    
+    <bean id="springManagedSiteProductDisplayAction" class="com.groovyfly.site.actions.shopping.ProductDisplayAction" scope="prototype">
+        <property name="productServiceIF" ref="productService" />
+    </bean>
+    
+    <bean id="springManagedSiteCollectionAction" class="com.groovyfly.site.actions.shopping.CollectionAction" scope="prototype">
+        <property name="CollectionServiceIF" ref="collectionService" />
+        <property name="productServiceIF" ref="productService" />
+    </bean>
+    
+    <bean id="springManagedSiteProductQuickDisplayAction" class="com.groovyfly.site.actions.shopping.ProductQuickDisplayAction" scope="prototype">
+        <property name="productServiceIF" ref="productService" />
+    </bean>
+    
+    <bean id="springManagedJsonProductSearchAction" class="com.groovyfly.admin.actions.productmanagement.JsonProductSearchAction" scope="prototype">
+        <property name="productServiceIF" ref="productService" />
+    </bean>
+    
+    <bean id="springManagedProductRatingAction" class="com.groovyfly.site.actions.shopping.ProductRatingAction" scope="prototype">
+        <property name="commentsAndRatingServiceIF" ref="commentsAndRatingService" />
+    </bean>
+    
+    <bean id="springManagedPurchaseAction" class="com.groovyfly.site.actions.shopping.PurchaseAction" scope="prototype">
+        <property name="shoppingServiceIF" ref="shoppingService" />
+    </bean>
+    
+    <bean id="springManagedShoppingCartAction" class="com.groovyfly.site.actions.shopping.ShoppingCartAction" scope="prototype">
+        <property name="royalMailPostageCalculator" ref="royalMailPostageCalculator" />
+    </bean>
+    
+    <bean id="springManagedModifyCartEntryAction" class="com.groovyfly.site.actions.shopping.ModifyCartEntryAction" scope="prototype">
+        <property name="discountsServiceIF" ref="discountsService" />
+        <property name="shoppingServiceIF" ref="shoppingService" />
+    </bean>
+    
+    <!-- paypal checkout process -->
+    
+    <bean id="springManagedCheckoutPaypalAction" class="com.groovyfly.site.actions.shopping.paypal.CheckoutPaypalAction" scope="prototype" />
+    
+    <bean id="springManagedReviewPaypalAction" class="com.groovyfly.site.actions.shopping.paypal.ReviewPaypalAction" scope="prototype">
+        <property name="royalMailPostageCalculator" ref="royalMailPostageCalculator" />
+    </bean>
+    
+    <bean id="springManagedConfirmPaypalAction" class="com.groovyfly.site.actions.shopping.paypal.ConfirmPaypalAction" scope="prototype">
+        <property name="shoppingServiceIF" ref="shoppingService" />
+    </bean>
+    
+    <bean id="springManagedDownloadReceiptAction" class="com.groovyfly.site.actions.shopping.DownloadReceiptAction" scope="prototype">
+        <property name="configurationServiceIF" ref="configurationService" />
+        <property name="ordersServiceIF" ref="ordersService" />
+    </bean>
+    
+    <!-- supplier -->
+    
+    <bean id="springManagedSupplierFormAction" class="com.groovyfly.site.actions.supplier.SupplierRegistrationAction" scope="prototype">
+        <property name="lookupServiceIF" ref="lookupService" />
+    </bean>
+    
+    <!-- Other -->
+
+    <bean id="springManagedSuggestFlyPatternAction" class="com.groovyfly.site.actions.SuggestFlyPatternAction" scope="prototype">
+         <property name="CustomerSuggestionServiceIF" ref="customerSuggestionService" />
+    </bean>
+    <bean id="springManagedSuggestFlyPatternsSubmittedAction" class="com.groovyfly.site.actions.SuggestFlyPatternsSubmittedAction" scope="prototype">
+        <property name="CustomerSuggestionServiceIF" ref="customerSuggestionService" />
+    </bean>
+    
+    
+</beans>

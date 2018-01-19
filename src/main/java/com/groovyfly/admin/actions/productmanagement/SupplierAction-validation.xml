@@ -1,0 +1,27 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+
+	<field name="supplier.shortCode">
+		<field-validator type="requiredstring">
+			<message>A short code is required.</message>
+		</field-validator>
+		<field-validator type="stringlength">
+            <param name="maxLength">4</param>
+            <param name="minLength">4</param>
+            <message>The short code must be 4 characters in length.</message>
+        </field-validator>
+	</field>
+	<field name="supplier.companyName">
+        <field-validator type="requiredstring">
+            <message>A company name is required.</message>
+        </field-validator>
+	</field>
+	<field name="supplier.email">
+		<field-validator type="email">
+			<message>${supplier.email} is not a valid email address.</message>
+		</field-validator>
+	</field>
+
+</validators>

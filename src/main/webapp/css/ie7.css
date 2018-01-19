@@ -1,0 +1,68 @@
+.top_bg {
+margin-left: -40px;
+}
+
+.newsletter .newsletter_submit {
+padding: 6px 3px;
+margin-top: -15px;
+}
+
+.call_act {
+margin-top: 0;
+}
+
+ul.list1 li, ul.list2 li, ul.list3 li , ul.list4 li, ul.list5 li, ul.list6 li,
+ul.list7 li , ul.list8 li, ul.list9 li, ul.list10 li, ul.list11 li , ul.list12 li , ul.list13 li, ul.list14 li, ul.list15 li, ul.list16 li  {
+	padding-left:20px;
+	display:block;
+	list-style: none;
+}
+
+#list_pagination {
+margin-left: 20px;
+margin-top: 50px;
+margin-bottom: 10px;
+}
+
+#list_pagination a, #list_pagination .active_list_link, #list_pagination .disabled_list_pagination{
+border:1px solid #B4B4B4;
+border-top:1px solid #B4B4B4;
+border-bottom:1px solid #B4B4B4;
+}
+
+#list_pagination .active_list_link {
+border:1px solid #666;
+}
+
+#leave_comment #comment_form label {
+display: block;
+}
+
+#leave_comment #comment_form  .info_box{
+display: none;
+}
+
+#contact label{
+display: block;
+}
+
+#contact .input_label {
+width: 80px !important;
+display: block;
+float: left;
+}
+
+#contact  input[type=text]{
+margin: -1px 8px 20px 0px;
+line-height: 36px;
+}
+
+#contact  input[type=submit]{
+margin: 0px 8px 20px 10px;
+padding: 8px 0px;
+}
+
+#contact  textarea{
+margin: -1px 8px 20px 0px;
+line-height: 24px;
+}

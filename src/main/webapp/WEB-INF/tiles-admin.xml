@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+    
+<!DOCTYPE tiles-definitions PUBLIC 
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" 
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> <!-- taken from the tiles core jar-->
+        
+<tiles-definitions>
+
+	<definition name="base-def" template="/admin/template/base.jsp">
+		<put-attribute name="header" value="/admin/template/header.jsp" />
+		<put-attribute name="customPageCss" value="" />
+		<put-attribute name="top-nav" value="/admin/template/top-nav.jsp" />
+		<put-attribute name="side-nav" value="/admin/template/side-nav.jsp" />
+		<put-attribute name="footer" value="/admin/template/footer.jsp" />
+		<put-attribute name="customPageJs" value="" />
+	</definition>
+
+	<definition name="dashboard" extends="base-def">
+	   <put-attribute name="page-title" value="Groovy Fly Admin"/>
+	   <put-attribute name="main" value="/admin/dashboard.jsp"/>
+	</definition>
+
+	<definition name="product-management" extends="base-def">
+		<put-attribute name="page-title" value="Product Management" />
+		<put-attribute name="main" value="/admin/product-management/product-management.jsp" />
+	</definition>
+	
+    <definition name="product-list" extends="base-def">
+        <put-attribute name="page-title" value="Products" />
+        <put-attribute name="main" value="/admin/product-management/products.jsp" />
+        <put-attribute name="customPageJs" value="/admin/product-management/products-page-script.jsp" />
+    </definition>
+    
+    <definition name="product" extends="base-def">
+        <put-attribute name="page-title" value="Product" />
+        <put-attribute name="main" value="/admin/product-management/product.jsp" />
+        <put-attribute name="customPageJs" value="/admin/product-management/product-page-script.jsp" />
+    </definition>
+    
+    <definition name="groupings-list" extends="base-def">
+        <put-attribute name="page-title" value="Groupings" />
+        <put-attribute name="main" value="/admin/product-management/groupings.jsp" />
+        <put-attribute name="customPageJs" value="/admin/product-management/groupings-page-script.jsp" />
+    </definition>
+    
+    <definition name="groupings" extends="base-def">
+        <put-attribute name="page-title" value="Grouping" />
+        <put-attribute name="main" value="/admin/product-management/grouping.jsp" />
+        <put-attribute name="customPageJs" value="/admin/product-management/grouping-page-script.jsp" />
+    </definition>
+    
+    <definition name="product-quick-grouping" extends="base-def">
+        <put-attribute name="page-title" value="Product and Grouping" />
+        <put-attribute name="main" value="/admin/product-management/product-quick-grouping.jsp" />
+        <put-attribute name="customPageJs" value="/admin/product-management/product-quick-grouping-page-script.jsp" />
+    </definition>
+    
+    <definition name="supplier-list" extends="base-def">
+        <put-attribute name="page-title" value="Suppliers" />
+        <put-attribute name="main" value="/admin/product-management/suppliers.jsp" />
+    </definition>
+    
+    <definition name="supplier" extends="base-def">
+        <put-attribute name="page-title" value="Supplier" />
+        <put-attribute name="main" value="/admin/product-management/supplier.jsp" />
+    </definition>
+    
+    <definition name="category-list" extends="base-def">
+        <put-attribute name="page-title" value="Categories" />
+        <put-attribute name="main" value="/admin/product-management/categories.jsp" />
+    </definition>
+    
+    <definition name="category" extends="base-def">
+        <put-attribute name="page-title" value="Category" />
+        <put-attribute name="main" value="/admin/product-management/category.jsp" />
+    </definition>
+</tiles-definitions> 

@@ -1,0 +1,70 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="supplierRegistrationDetails.tradingYears">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="int">
+            <param name="min">0</param>
+            <param name="max">100</param>
+            <message>Value needs to be between ${min} and ${max}</message>
+        </field-validator>
+    </field>
+    
+    <field name="supplierRegistrationDetails.fullTimeStaff">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="int">
+            <param name="min">1</param>
+            <param name="max">300</param>
+            <message>Value needs to be between ${min} and ${max}</message>
+        </field-validator>
+    </field>  
+    
+    <field name="supplierRegistrationDetails.partTimeStaff">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="int">
+            <param name="min">0</param>
+            <param name="max">300</param>
+            <message>Value needs to be between ${min} and ${max}</message>
+        </field-validator>
+    </field> 
+    
+    <field name="supplierRegistrationDetails.seasonalStaff">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="int">
+            <param name="min">0</param>
+            <param name="max">300</param>
+            <message>Value needs to be between ${min} and ${max}</message>
+        </field-validator>
+    </field> 
+    
+    <field name="supplierRegistrationDetails.averageFliesPerMonth">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="int">
+            <param name="min">0</param>
+            <param name="max">90500</param>
+            <message>Value needs to be between ${min} and ${max}</message>
+        </field-validator>
+    </field>    
+    
+    <field name="supplierRegistrationDetails.outsourcesFlies">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+    </field>               
+</validators>
+

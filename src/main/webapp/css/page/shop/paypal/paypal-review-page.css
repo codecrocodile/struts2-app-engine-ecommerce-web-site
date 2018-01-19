@@ -1,0 +1,81 @@
+
+button {
+    cursor: pointer;
+}
+
+.buttonContainer {
+    margin: 10px 0px;
+}
+
+hr {
+	width:95%;
+    margin: 5px auto;
+    border-color: #aaa;
+}
+
+hr.dashed {
+	width:90%;
+    border-style: dashed;
+    margin: 5px auto 15px auto;
+}
+
+address {
+	margin: 0px;
+    font-style: normal;
+}
+
+table {
+    border:none;
+    border-collapse:collapse;
+    margin: 5px;
+    width: 90%;
+    text-align: centre;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table th, tfoot td {
+	padding:5px;
+	color: #555;
+	text-align: left;
+	background: #f1f1f1;
+	border-right:none;
+	font-size:14px;
+	font-weight: 700;
+}
+
+table td {
+	border:none;
+	padding:5px;
+	padding-left:13px;
+	text-align: left;
+	background: inherit;
+}
+
+table td:hover {
+    background-color: inherit;
+}
+
+pre {
+    display:block;
+    padding:0px;
+    border:0;
+    border:none;
+    color: #555;
+    background:none;
+    font-size:inherit;
+    line-height:22px;
+    margin: 0;
+    overflow:hidden;
+    font-family:inherit;
+}
+
+.price_footer {
+    height: 95px;
+    line-height: 0px;
+}
+
+.price_footer .inside p {
+	font-size: 10px;
+    margin: 5px;
+}

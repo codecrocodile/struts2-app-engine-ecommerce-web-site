@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>war</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <groupId>com.groovyfly</groupId>
+    <artifactId>GroovyFly</artifactId>
+    
+
+    <properties>
+        <appengine.app.version>1</appengine.app.version>
+        <appengine.target.version>1.8.9</appengine.target.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <struts2.version>2.3.15.2</struts2.version>
+    </properties>
+
+    <dependencies>
+        <!-- Compile/runtime dependencies -->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>${appengine.target.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        
+        
+        
+		
+		<!--  Struts 2 -->
+		<dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-core</artifactId>
+            <version>${struts2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-sitemesh-plugin</artifactId>
+            <version>${struts2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-spring-plugin</artifactId>
+            <version>${struts2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-config-browser-plugin</artifactId>
+            <version>${struts2.version}</version>
+        </dependency>
+        
+        
+        
+        <!-- Jakarta Commons -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3</version>
+		</dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+
+		<!-- For processing base24 strings -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.8</version>
+		</dependency>
+
+		<!-- For RSS feed plugin -->
+		<dependency>
+		    <groupId>com.googlecode.s2rome</groupId>
+		    <artifactId>struts2-rome-plugin</artifactId>
+		    <version>0.3</version>
+		</dependency>
+
+		<!-- For captcha -->
+		<dependency>
+			<groupId>net.tanesha.recaptcha4j</groupId>
+			<artifactId>recaptcha4j</artifactId>
+			<version>0.0.7</version>
+		</dependency>
+
+		<!-- For itext pdf creation -->
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.4.4</version>
+		</dependency>
+
+		<!-- For string processing -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<!-- Plugin form google code for file upload with gae and struts2 ( required to be insalled in maven local repo ) -->
+		<dependency>
+			<groupId>com.struts2.gae</groupId>
+			<artifactId>struts2-gae</artifactId>
+			<version>0.1</version>
+		</dependency>
+
+		<!-- Paypal libs ( required to be insalled in maven local repo )  -->
+		<dependency>
+			<groupId>com.paypal</groupId>
+			<artifactId>merchant-java-sdk</artifactId>
+			<version>1.2.95</version>
+		</dependency>
+		<dependency>
+			<groupId>com.paypal</groupId>
+			<artifactId>paypal-auth-signature</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<!-- Struts 2 JQuery Plugin -->
+		<dependency>
+			<groupId>com.jgeppert.struts2.jquery</groupId>
+			<artifactId>struts2-jquery-plugin</artifactId>
+			<version>3.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jgeppert.struts2.jquery</groupId>
+			<artifactId>struts2-jquery-chart-plugin</artifactId>
+			<version>3.6.1</version>
+		</dependency>
+
+		<!-- JSON Plugin -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-json-plugin</artifactId>
+			<version>2.3.15.2</version>
+		</dependency>
+
+		<!--  tiles plugin -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-tiles-plugin</artifactId>
+			<version>2.3.15.2</version>
+		</dependency>
+
+		<!-- MySql Driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.26</version>
+		</dependency>
+            
+        
+
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-testing</artifactId>
+            <version>${appengine.target.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-stubs</artifactId>
+            <version>${appengine.target.version}</version>
+            <scope>test</scope>
+        </dependency>
+       	<!-- Junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Selenium -->
+		<dependency>
+	        <groupId>org.seleniumhq.selenium</groupId>
+	        <artifactId>selenium-java</artifactId>
+	        <version>2.35.0</version>
+	        <scope>test</scope>
+	    </dependency> 
+	    <dependency>
+	        <groupId>org.seleniumhq.selenium</groupId>
+	        <artifactId>selenium-firefox-driver</artifactId>
+	        <version>2.35.0</version>
+	        <scope>test</scope>
+	    </dependency>
+	    <!-- Struts 2 Specific Testing -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-junit-plugin</artifactId>
+			<version>${struts2.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Required because we are using StrutsSpringTestCase as Unit testing class (because we are using spring as container)-->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- GAE -->
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-remote-api</artifactId>
+			<version>${appengine.target.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine.tools</groupId>
+			<artifactId>appengine-gcs-client</artifactId>
+			<version>0.3.5</version>
+		</dependency>
+		
+    </dependencies>
+
+    
+    <build>
+    <outputDirectory>target/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <version>2.5.1</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <archiveClasses>true</archiveClasses>
+                    <webResources>
+                        <!-- in order to interpolate version from pom into appengine-web.xml -->
+                        <resource>
+                            <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                            <filtering>true</filtering>
+                            <targetPath>WEB-INF</targetPath>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>${appengine.target.version}</version>
+				<configuration>
+					<fullScanSeconds>4</fullScanSeconds>
+					<port>8888</port>
+					<jvmFlags>
+						<jvmFlag>-Xdebug</jvmFlag>
+						<jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>
+					</jvmFlags>
+				</configuration>
+
+            </plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.16</version>
+				<configuration>
+					<!-- Skip the normal tests, we'll run them in the integration-test phase -->
+					<skip>true</skip>
+				</configuration>
+		
+				<executions>
+					<execution>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>false</skip>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+        </plugins>
+
+    </build>
+
+</project>

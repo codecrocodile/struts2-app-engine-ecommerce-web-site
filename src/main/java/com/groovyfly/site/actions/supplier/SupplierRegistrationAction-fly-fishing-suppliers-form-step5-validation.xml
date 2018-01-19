@@ -1,0 +1,80 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+
+    <field name="supplierRegistrationDetails.minOrderDozen">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+        
+		<field-validator type="int">
+		    <param name="min">0</param>
+		    <param name="max">50000</param>
+		    <message>Value needs to be between ${min} and ${max}</message>
+		</field-validator>
+    </field>
+    
+    <field name="supplierRegistrationDetails.minOrderDolars">
+        <field-validator type="double">
+			<param name="minInclusive">0.0</param>
+			<param name="maxInclusive">50000.00</param>
+			<message>Value needs to be between ${minInclusive} and ${maxInclusive} (inclusive)</message>
+        </field-validator>
+    </field>
+    
+    <field name="supplierRegistrationDetails.minOrderPerPattern">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="int">
+            <param name="min">0</param>
+            <param name="max">100</param>
+            <message>Value needs to be between ${min} and ${max}</message>
+        </field-validator>
+    </field>   
+    
+    <field name="supplierRegistrationDetails.leadTimeWeeks">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="int">
+            <param name="min">1</param>
+            <param name="max">52</param>
+            <message>Value needs to be between ${min} and ${max}</message>
+        </field-validator>
+    </field>  
+    
+    <field name="supplierRegistrationDetails.downPayment">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="int">
+            <param name="min">0</param>
+            <param name="max">100</param>
+            <message>Value needs to be between ${min} and ${max}</message>
+        </field-validator>
+    </field>  
+    
+    <field name="supplierRegistrationDetails.downPaymentNegotiable">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+    </field>  
+    
+    <field name="supplierRegistrationDetails.dozenWetFliesDolars">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+        <field-validator type="double">
+            <param name="minInclusive">0.0</param>
+            <param name="maxInclusive">50000.00</param>
+            <message>Value needs to be between ${minInclusive} and ${maxInclusive} (inclusive)</message>
+        </field-validator>        
+    </field>  
+                
+</validators>
+

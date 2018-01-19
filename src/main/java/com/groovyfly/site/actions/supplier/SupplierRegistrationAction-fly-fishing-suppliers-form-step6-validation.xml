@@ -1,0 +1,48 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="supplierRegistrationDetails.paymentOptions">
+        <field-validator type="required">
+            <message>You are required to select a value.</message>
+        </field-validator>
+        
+        <field-validator type="fieldexpression">
+            <param name="expression"><![CDATA[supplierRegistrationDetails.paymentOptions.length > 0]]></param><!-- expression is for a valid value -->
+            <message>Please select at least one of the options.</message>
+        </field-validator>
+    </field> 
+
+    <field name="supplierRegistrationDetails.otherPaymentMethods">
+        <field-validator type="stringlength">
+            <param name="maxLength">4000</param>
+            <param name="trim">true</param>
+            <message>Sorry, you have entered too much information (4000 character maximum).</message>
+        </field-validator>
+    </field>
+    
+    <field name="supplierRegistrationDetails.shippingMethods">
+        <field-validator type="required">
+            <message>You are required to select a value.</message>
+        </field-validator>
+        <field-validator type="fieldexpression">
+            <param name="expression"><![CDATA[supplierRegistrationDetails.shippingMethods.length > 0]]></param><!-- expression is for a valid value -->
+            <message>Please select at least one of the options.</message>
+        </field-validator>
+    </field> 
+    
+    <field name="supplierRegistrationDetails.otherShippingMethods">
+        <field-validator type="stringlength">
+            <param name="maxLength">4000</param>
+            <param name="trim">true</param>
+            <message>Sorry, you have entered too much information (4000 character maximum).</message>
+        </field-validator>
+    </field>   
+    
+    <field name="supplierRegistrationDetails.freePostageLargeOrders">
+        <field-validator type="required">
+            <message>You are required to select a value.</message>
+        </field-validator>
+    </field> 
+    
+</validators>
+

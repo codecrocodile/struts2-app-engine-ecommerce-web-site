@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="admin" namespace="/admin" extends="struts-default">
+
+		<result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/> 
+		</result-types>
+
+		<!-- start required for struts2-gae-0.1.jar file upload -->
+		<!-- not that this need to be defined for the package you are uploading from and not just the root package -->
+		<interceptors>
+			<interceptor name="gaeFileUploadInterceptor" class="com.struts2.gae.interceptor.GaeFileUploadInterceptor" />
+			<interceptor name="baseAdminInterceptor" class="com.groovyfly.admin.interceptors.BaseAdminInterceptor" />
+
+			<interceptor-stack name="fileUploadStack">
+				<interceptor-ref name="gaeFileUploadInterceptor"></interceptor-ref>
+				<interceptor-ref name="basicStack"></interceptor-ref>
+			</interceptor-stack>
+
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="exception" />
+				<interceptor-ref name="alias" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="chain" />
+				<interceptor-ref name="scopedModelDriven" />
+				<interceptor-ref name="modelDriven" />
+				<interceptor-ref name="gaeFileUploadInterceptor" />
+				<interceptor-ref name="checkbox" />
+				<interceptor-ref name="multiselect" />
+				<interceptor-ref name="staticParams" />
+				<interceptor-ref name="actionMappingParams" />
+				<interceptor-ref name="params">
+					<param name="excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*</param>
+				</interceptor-ref>
+				<interceptor-ref name="conversionError" />
+				<interceptor-ref name="validation">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+				<interceptor-ref name="workflow">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+				<interceptor-ref name="debugging" />
+			</interceptor-stack>
+
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="baseAdminInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="secureStack" />
+
+		<!-- end required for struts2-gae-0.1.jar file upload -->
+
+		<global-results>
+			<result name="login" type="redirect">admin-login</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="error" />
+		</global-exception-mappings>
+		
+		<action name="">
+            <result type="redirect">admin-login</result>
+        </action>
+
+		<action name="admin-login" class="com.groovyfly.admin.actions.AdminLogin">
+			<result name="success">/admin/admin-login.jsp</result>
+			<result name="Not_Required" type="redirect">dashboard</result>
+		</action>
+		
+		<action name="login" class="com.groovyfly.common.actions.LoginAction">
+            <result name="success" type="redirect">dashboard</result> <!-- if name attribute not provided then success is presumed -->
+            <result name="input">/admin/admin-login.jsp</result><!-- if validation error then "input" return which tells Struts workflow intercepter to go back to this page -->
+        </action>
+
+        <action name="logout" class="com.groovyfly.common.actions.LogoutAction">
+            <result type="redirect">admin-login</result>
+        </action>
+
+        <action name="dashboard" class="com.groovyfly.admin.actions.DashboardAction">
+            <result type="tiles">dashboard</result>
+        </action>
+        
+        <action name="product-management" class="springManagedProductManagementAction">
+            <result name="success" type="tiles">product-management</result>
+        </action>
+		
+		<action name="products-*" method="{1}" class="springManagedProductAction">
+		    <result name="error">/admin/error.jsp</result>
+            <result type="tiles" name="input">${destination}</result>
+            <result type="tiles" name="success">${destination}</result>
+            <result type="tiles" name="quick-grouping">${destination}-quick-grouping</result>
+            <result type="tiles" name="list">${destination}-list</result>
+        </action>
+		
+	    <action name="suppliers-*" method="{1}" class="springManagedSupplierAction">
+            <result type="tiles" name="input">${destination}</result>
+            <result type="tiles" name="success">${destination}</result>
+            <result type="tiles" name="list">${destination}-list</result>
+        </action>
+        
+        <action name="categories-*" method="{1}" class="springManagedCategoryAction">
+            <result type="tiles" name="input">${destination}</result>
+            <result type="tiles" name="success">${destination}</result>
+            <result type="tiles" name="list">${destination}-list</result>
+        </action>
+        
+        <action name="groupings-*" method="{1}" class="springManagedGroupingAction">
+            <result type="tiles" name="input">${destination}</result>
+            <result type="tiles" name="success">${destination}</result>
+            <result type="tiles" name="list">${destination}-list</result>
+        </action>
+
+	</package>
+	
+	<package name="adminJson" extends="json-default">
+	
+        <action name="product-search" class="springManagedJsonProductSearchAction">
+            <result type="json">
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="root">productSummaries</param>          
+            </result>
+        </action>
+        
+    </package>
+
+</struts>
+
+

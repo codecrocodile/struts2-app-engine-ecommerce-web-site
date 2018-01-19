@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC 
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" 
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd"> <!-- taken from the tiles core jar-->
+        
+<tiles-definitions>
+
+    <!-- Base Definitions -->
+
+    <definition name="site-base-template" template="/template/base-template.jsp">
+        <put-attribute name="customPageJs" value="" />
+    </definition>
+    
+    <!-- Main Pages -->
+    
+    <definition name="homepage" extends="site-base-template">
+       <put-attribute name="main" value="/homepage.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+
+    <definition name="privacy-policy" extends="site-base-template">
+       <put-attribute name="main" value="/privacy-policy.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="terms" extends="site-base-template">
+       <put-attribute name="main" value="/terms.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="about" extends="site-base-template">
+       <put-attribute name="main" value="/about.jsp"/>
+    </definition>
+    
+    <definition name="sitemap" extends="site-base-template">
+       <put-attribute name="main" value="/sitemap.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="links" extends="site-base-template">
+       <put-attribute name="main" value="/links.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <!-- Customer Services -->
+    
+    <definition name="customer-service-homepage" extends="site-base-template">
+          <put-attribute name="main" value="/customer-service/customer-service-homepage.jsp"/>
+          <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="terms-of-sale" extends="site-base-template">
+       <put-attribute name="main" value="/customer-service/terms-of-sale.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="delivery-rates-and-policy" extends="site-base-template">
+       <put-attribute name="main" value="/customer-service/delivery-rates-and-policy.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="returns-policy" extends="site-base-template">
+       <put-attribute name="main" value="/customer-service/returns-policy.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="faqs" extends="site-base-template">
+       <put-attribute name="main" value="/customer-service/faqs.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="contact" extends="site-base-template">
+          <put-attribute name="main" value="/customer-service/contact.jsp"/>
+    </definition>
+  
+	<!-- Groovy Pages -->
+	
+	<definition name="fishing-articles-homepage" extends="site-base-template">
+	   <put-attribute name="main" value="/fishing-articles/fishing-articles-homepage.jsp"/>
+	   <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+	</definition>
+	
+	<definition name="groovy-fly-fishing-pages" extends="site-base-template">
+	   <put-attribute name="main" value="/fishing-articles/groovy-fly-fishing-pages.jsp"/>
+	   <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+	</definition>
+        
+    
+    <!-- Utility Pages -->
+    
+    <definition name="error" extends="site-base-template">
+       <put-attribute name="main" value="/util-pages/error.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="newsletter-unsubscribed" extends="site-base-template">
+       <put-attribute name="main" value="/util-pages/newsletter-unsubscribed.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    
+    <!-- Shopping pages -->
+    
+    <definition name="category-page" extends="site-base-template">
+        <put-attribute name="main" value="/shop/category-page.jsp" />
+        <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="product-page" extends="site-base-template">
+        <put-attribute name="main" value="/shop/product-page.jsp" />
+        <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="collection-page" extends="site-base-template">
+        <put-attribute name="main" value="/shop/collection-page.jsp" />
+        <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <definition name="shopping-cart-page" extends="site-base-template">
+        <put-attribute name="main" value="/shop/shopping-cart-page.jsp" />
+        <put-attribute name="sidebar" value="/shop/shopping-cart-sidebar.jsp" />
+    </definition>
+    
+    
+    <!-- Link Directory Pages -->
+    
+    <definition name="directory-page" extends="site-base-template">
+        <put-attribute name="main" value="/link-directory/directory-page.jsp" />
+        <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <!-- Paypal Checkout pages -->
+    
+    <definition name="paypal-review-page" extends="site-base-template">
+        <put-attribute name="main" value="/shop/paypal/paypal-review-page.jsp" />
+        <put-attribute name="sidebar" value="/shop/paypal/paypal-review-sidebar.jsp" />
+        <put-attribute name="customPageCss" value="/css/page/shop/paypal/paypal-review-page.css" />
+    </definition>
+    
+    <definition name="paypal-complete-page" extends="site-base-template">
+        <put-attribute name="main" value="/shop/paypal/paypal-complete-page.jsp" />
+        <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+        <put-attribute name="customPageCss" value="/css/page/shop/paypal/paypal-complete-page.css" />
+    </definition>
+        
+    <definition name="paypal-error-page" extends="site-base-template">
+        <put-attribute name="main" value="/shop/paypal/paypal-error-page.jsp" />
+        <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <!-- Supplier Pages -->
+    <definition name="fly-fishing-suppliers-homepage" extends="site-base-template">
+        <put-attribute name="main" value="/fly-fishing-suppliers/fly-fishing-suppliers-homepage.jsp" />
+        <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    <definition name="fly-fishing-suppliers-form-step1" extends="site-base-template">
+        <put-attribute name="main" value="/fly-fishing-suppliers/fly-fishing-supplier-form-step1.jsp" />
+    </definition>
+    <definition name="fly-fishing-suppliers-form-step2" extends="site-base-template">
+        <put-attribute name="main" value="/fly-fishing-suppliers/fly-fishing-supplier-form-step2.jsp" />
+    </definition>
+    <definition name="fly-fishing-suppliers-form-step3" extends="site-base-template">
+        <put-attribute name="main" value="/fly-fishing-suppliers/fly-fishing-supplier-form-step3.jsp" />
+    </definition>
+    <definition name="fly-fishing-suppliers-form-step4" extends="site-base-template">
+        <put-attribute name="main" value="/fly-fishing-suppliers/fly-fishing-supplier-form-step4.jsp" />
+    </definition>
+    <definition name="fly-fishing-suppliers-form-step5" extends="site-base-template">
+        <put-attribute name="main" value="/fly-fishing-suppliers/fly-fishing-supplier-form-step5.jsp" />
+    </definition>
+    <definition name="fly-fishing-suppliers-form-step6" extends="site-base-template">
+        <put-attribute name="main" value="/fly-fishing-suppliers/fly-fishing-supplier-form-step6.jsp" />
+    </definition>    
+    <definition name="fly-fishing-suppliers-form-complete" extends="site-base-template">
+        <put-attribute name="main" value="/fly-fishing-suppliers/fly-fishing-supplier-form-complete.jsp" />
+        <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>
+    
+    <!-- Other Pages -->
+    
+    <definition name="suggest-a-fly-pattern-page" extends="site-base-template">
+       <put-attribute name="main" value="/suggest-a-fly-pattern.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition> 
+    <definition name="suggest-a-fly-pattern-submitted-page" extends="site-base-template">
+       <put-attribute name="main" value="/suggest-a-fly-pattern-submitted.jsp"/>
+       <put-attribute name="sidebar" value="/template/sidebar.jsp" />
+    </definition>    
+    
+    
+</tiles-definitions> 

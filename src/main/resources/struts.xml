@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- NOTE: constants can be specified here or they can be added to the struts.properies. it amounts to the same thing. -->
+    
+	<!-- When you turn devMode on, Struts2 will try to write to the disk for logging, which is denied by GAE, 
+	     it can only write to Google data store, so leave this off.
+	<constant name="struts.devMode" value="false" /> -->
+	
+	<!-- Struts will capture all urls. We must therefore exclude urls for the GAE admin console. This uses
+	     regex and the constant elements can only be specified once in this file. -->
+	<!-- We also exclude the URL for GAE remote access. There is a servlet defined in web.xml to handle these requests. -->
+	<constant name="struts.action.excludePattern" value="/_ah/.*?, /remote_api" />
+	
+	<!-- The following setting are so that we can use the url to specify a category and product we want to 
+	     target e.g. /shop/*/item/* where the first wildcard is the category and the second is the product -->
+	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+	
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="">
+			<result type="redirect">homepage</result>
+		</action>
+	</package>
+	
+	<include file="com/groovyfly/admin/admin-struts.xml" />
+	<include file="com/groovyfly/site/site-struts.xml" />
+</struts>
+
+

@@ -1,0 +1,89 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+
+    <field name="supplierRegistrationDetails.supplier.companyName">
+        <field-validator type="requiredstring">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="maxLength">100</param>
+            <param name="trim">true</param>
+            <message>Sorry, value is too long (100 character maximum).</message>
+        </field-validator>
+    </field>
+    
+    <field name="supplierRegistrationDetails.supplier.address.country">
+        <field-validator type="requiredstring">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="maxLength">50</param>
+            <param name="trim">true</param>
+            <message>Sorry, value is too long (50 character maximum).</message>
+        </field-validator>        
+    </field>  
+    
+    <field name="supplierRegistrationDetails.supplier.contactPerson.forename">
+        <field-validator type="requiredstring">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="maxLength">35</param>
+            <param name="trim">true</param>
+            <message>Sorry, value is too long (35 character maximum).</message>
+        </field-validator>
+    </field>
+    
+    <field name="supplierRegistrationDetails.supplier.contactPerson.surname">
+        <field-validator type="requiredstring">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="maxLength">35</param>
+            <param name="trim">true</param>
+            <message>Sorry, value is too long (35 character maximum).</message>
+        </field-validator>
+    </field> 
+    
+    <field name="supplierRegistrationDetails.supplier.tel">
+        <field-validator type="requiredstring">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="maxLength">50</param>
+            <param name="trim">true</param>
+            <message>Sorry, value is too long (50 character maximum).</message>
+        </field-validator>
+    </field>   
+    
+    <field name="supplierRegistrationDetails.englishSpeaking">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+    </field>   
+    
+    <field name="supplierRegistrationDetails.supplier.email">
+        <field-validator type="requiredstring">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="maxLength">100</param>
+            <param name="trim">true</param>
+            <message>Sorry, value is too long (50 character maximum).</message>
+        </field-validator>        
+        
+        <field-validator type="email">
+            <message>You must provide a valid email.</message>
+        </field-validator>
+    </field>           
+          
+</validators>
+

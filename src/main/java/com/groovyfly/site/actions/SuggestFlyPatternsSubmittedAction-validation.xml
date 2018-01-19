@@ -1,0 +1,36 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<!-- this doesn't seem to be working - might need to turn on the fine logging to see what struts is doing -->
+<validators>
+
+    <field name="XCoord">
+        <field-validator type="fieldexpression">
+            <param name="expression"><![CDATA[XCoord != -999.0]]></param>
+            <message>Please select your fishing location.</message>
+        </field-validator>
+    </field>
+    
+    <field name="name">
+        <field-validator type="stringlength">
+            <param name="maxLength">50</param>
+            <message>
+                Name length too long (50 character maximum)
+            </message>
+        </field-validator>
+    </field>
+    
+    <field name="email">
+       <field-validator type="stringlength">
+            <param name="maxLength">150</param>
+            <message>
+                Backlink url length too long (150 character maximum)
+            </message>
+        </field-validator>
+        <field-validator type="email">
+          <message>${email} is an invalid email address. Please check and enter again.</message>
+        </field-validator>
+    </field>
+    
+</validators>
+

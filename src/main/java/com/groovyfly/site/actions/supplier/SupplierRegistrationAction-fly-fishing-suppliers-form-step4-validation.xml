@@ -1,0 +1,58 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+    <field name="supplierRegistrationDetails.averageDifferentPatterns">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+        
+        <field-validator type="int">
+            <param name="min">0</param>
+            <param name="max">50000</param>
+            <message>Value needs to be between ${min} and ${max}</message>
+        </field-validator>
+    </field>
+    
+    <field name="supplierRegistrationDetails.tiesCustomPatterns">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+    </field>   
+     
+    <field name="supplierRegistrationDetails.usesBrandedHooks">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+    </field>  
+
+    <field name="supplierRegistrationDetails.hookBrands">
+        <field-validator type="stringlength">
+            <param name="maxLength">4000</param>
+            <param name="trim">true</param>
+            <message>Sorry, you have entered too much information (4000 character maximum).</message>
+        </field-validator>
+    </field> 
+    
+    <field name="supplierRegistrationDetails.usesBrandedThread">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+    </field>  
+
+    <field name="supplierRegistrationDetails.threadBrands">
+        <field-validator type="stringlength">
+            <param name="maxLength">4000</param>
+            <param name="trim">true</param>
+            <message>Sorry, you have entered too much information (4000 character maximum).</message>
+        </field-validator>
+    </field>  
+    
+    <field name="supplierRegistrationDetails.materialListSupplied">
+        <field-validator type="required">
+            <message>This field is required.</message>
+        </field-validator>
+    </field>                  
+    
+</validators>
+

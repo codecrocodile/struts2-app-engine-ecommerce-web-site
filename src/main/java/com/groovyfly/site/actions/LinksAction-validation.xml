@@ -1,0 +1,70 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+    <field name="categoryId">
+        <field-validator type="int">
+            <param name="min">1</param>
+            <message>You are required to select a category.</message>
+        </field-validator>
+    </field>
+    
+    <field name="websiteUrl">
+        <field-validator type="requiredstring">
+            <message>Url (website address) is required.</message>
+        </field-validator>
+        <field-validator type="stringlength">
+            <param name="maxLength">2000</param>
+            <message>Url length too long (2000 character maximum)</message>
+        </field-validator>
+        <field-validator type="url"><!-- struts default url validation is crap btw, need to write regex or something else better -->
+            <message>Invalid website url. Please check and enter again.</message>
+        </field-validator>
+    </field>
+    
+    <field name="title">
+        <field-validator type="requiredstring">
+            <message>A title for the website is required.</message>
+        </field-validator>
+        <field-validator type="stringlength">
+            <param name="maxLength">50</param>
+            <message>
+                Title length too long (50 character maximum)
+            </message>
+        </field-validator>
+    </field>
+    
+    <field name="description">
+        <field-validator type="requiredstring">
+            <message>A good description of the website is required.</message>
+        </field-validator>
+        <field-validator type="stringlength">
+            <param name="maxLength">500</param>
+            <message>
+                Description length too long (500 character maximum)
+            </message>
+        </field-validator>
+    </field>
+    
+    <field name="backlinkUrl">
+        <field-validator type="stringlength">
+            <param name="maxLength">2000</param>
+            <message>
+                Backlink url length too long (2000 character maximum)
+            </message>
+        </field-validator>
+        <field-validator type="url">
+            <message>Invalid website url. Please check and enter again.</message>
+        </field-validator>
+    </field>
+    
+    <field name="contactEmail">
+        <field-validator type="requiredstring">
+            <message>Please enter your email address.</message>
+        </field-validator>
+        <field-validator type="email">
+          <message>${contactEmail} is an invalid email address. Please check and enter again.</message>
+        </field-validator>
+    </field>
+    
+</validators>

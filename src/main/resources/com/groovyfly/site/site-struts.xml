@@ -1,0 +1,266 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="site" namespace="/" extends="struts-default">
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/> 
+            <result-type name="rss" class="com.googlecode.s2rome.struts2.plugin.rome.RomeResult"/>
+        </result-types>
+    
+        <interceptors>
+            <interceptor name="baseSiteInterceptor" class="baseSiteInterceptor" />
+
+            <interceptor-stack name="baseSiteStack">
+                <interceptor-ref name="baseSiteInterceptor" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+            
+            <interceptor-stack name="tokenBaseSiteStack">
+               
+                <interceptor-ref name="baseSiteInterceptor" />
+                 <interceptor-ref name="token"/>
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+
+        </interceptors>
+        
+        <default-interceptor-ref name="baseSiteStack" />
+
+        <global-results>
+            <result type="tiles" name="error">error</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error" />
+        </global-exception-mappings>
+        
+        <action name="">
+            <result type="redirect">homepage</result>
+        </action>
+
+        <action name="homepage" class="springManagedHomePageAction">
+            <result type="tiles" name="success">homepage</result>
+        </action>
+        
+	    <action name="privacy-policy" class="com.groovyfly.site.actions.PassThroughSiteAction">
+            <result type="tiles" name="success">privacy-policy</result>
+        </action>
+        
+        <action name="terms" class="com.groovyfly.site.actions.PassThroughSiteAction">
+            <result type="tiles" name="success">terms</result>
+        </action>
+        
+        <action name="about" class="com.groovyfly.site.actions.PassThroughSiteAction">
+            <result type="tiles" name="success">about</result>
+        </action>
+        
+        <action name="sitemap" class="com.groovyfly.site.actions.PassThroughSiteAction">
+            <result type="tiles" name="success">sitemap</result>
+        </action>
+        
+        <action name="fishing-websites-*" method="{1}" class="springManagedLinksAction">
+            <result type="tiles" name="input">links</result>
+            <result type="tiles" name="success">links</result>
+        </action>
+        
+        <action name="suggest-a-fly-pattern" class="springManagedSuggestFlyPatternAction"> 
+            <result type="tiles" name="success">suggest-a-fly-pattern-page</result>
+        </action>
+        <action name="suggest-a-fly-pattern-submitted" class="springManagedSuggestFlyPatternsSubmittedAction"> 
+            <interceptor-ref name="tokenBaseSiteStack" />
+            <result type="tiles" name="success">suggest-a-fly-pattern-submitted-page</result>
+            <result type="tiles" name="input">suggest-a-fly-pattern-page</result>
+            <result type="tiles" name="invalid.token">suggest-a-fly-pattern-submitted-page</result>
+        </action>
+        
+        <action name="subscriber-unsubscribe" method="unsubscribe" class="springManagedNewsletterSubscribeAction">
+            <result type="tiles" name="success">newsletter-unsubscribed</result>
+        </action>
+        
+        <action name="rss" class="springManagedNewsFeedAction">
+	        <result type="rss">
+	            <!-- Required: the expression to find the SyndFeed object on the stack -->
+	            <param name="feedName">siteNewsFeed</param>
+	            <!-- Optional: feed type - for a full list, see below -->
+	            <param name="feedType">rss_2.0</param>
+	            <!-- Optional: the encoding type -->
+	            <param name="encoding">UTF-8</param>
+	            <!-- Optional: mime type -->
+	            <param name="mimeType">text/xml</param>
+	        </result>
+	        <interceptor-ref name="defaultStack" />
+        </action>
+        
+    </package>
+    
+    <package name="directory" namespace="/directory" extends="site">
+        <action name="fishing-websites/**" class="springManagedLinkDirectoryAction">
+            <result type="tiles" name="success">directory-page</result>
+        </action>
+    </package>
+    
+    <package name="shop" namespace="/shop" extends="site">
+    
+        <!-- note that we are sacrificing complete hierarchical product categorisation for simplicity -->
+        <action name="category/**" class="springManagedSiteCategoryAction">
+            <result type="tiles" name="success">category-page</result>
+        </action>
+        
+        <action name="product/**" class="springManagedSiteProductDisplayAction">
+            <result type="tiles" name="success">product-page</result>
+        </action>
+        
+        <action name="collection/**" class="springManagedSiteCollectionAction">
+            <result type="tiles" name="success">collection-page</result>
+        </action>
+        
+        <action name="product-quick-display" class="springManagedSiteProductDisplayAction"> 
+            <result name="success">product-quick-display-page.jsp</result>
+        </action>
+        
+        <!-- paypal checkout process-->
+        
+        <action name="shopping-cart-page" class="springManagedShoppingCartAction"> 
+            <result type="tiles" name="success">shopping-cart-page</result>
+        </action>
+        
+        <action name="checkout-paypal" class="springManagedCheckoutPaypalAction"> 
+            <result type="redirect" name="success">${paypalUrl}</result>
+            <result type="tiles" name="error">paypal-error-page</result>
+        </action>
+        
+        <action name="review-paypal" class="springManagedReviewPaypalAction"> 
+            <result type="tiles" name="success">paypal-review-page</result>
+            <result type="redirect" name="none">shopping-cart-page</result>
+            <result type="tiles" name="error">paypal-error-page</result>
+        </action>
+        
+        <action name="confirm-paypal" class="springManagedConfirmPaypalAction"> 
+            <result type="tiles" name="success">paypal-complete-page</result>
+            <result type="redirect" name="none">shopping-cart-page</result>
+            <result type="tiles" name="error">paypal-error-page</result>
+        </action>
+        
+        <action name="download-receipt" class="springManagedDownloadReceiptAction">
+	        <result name="success" type="stream"> 
+		        <param name="inputName">inputStream</param> 
+		        <param name="contentType">application/pdf</param> 
+		        <param name="allowCaching">false</param>
+		        <param name="contentLength">${contentLength}</param>
+		        <param name="contentDisposition">attachment;filename="${filename}.pdf"</param>
+	        </result>
+        </action>
+    </package>
+    
+	<package name="customer-services" namespace="/customer-services" extends="site">
+       
+        <action name="customer-service-homepage" class="com.groovyfly.site.actions.PassThroughSiteAction">
+            <result type="tiles" name="success">customer-service-homepage</result>
+        </action>
+        
+        <action name="terms-of-sale" class="com.groovyfly.site.actions.PassThroughSiteAction">
+            <result type="tiles" name="success">terms-of-sale</result>
+        </action>
+        
+        <action name="delivery-rates-and-policy" class="com.groovyfly.site.actions.PassThroughSiteAction">
+            <result type="tiles" name="success">delivery-rates-and-policy</result>
+        </action>
+        
+        <action name="returns-policy" class="com.groovyfly.site.actions.PassThroughSiteAction">
+            <result type="tiles" name="success">returns-policy</result>
+        </action>
+        
+        <action name="faqs" class="com.groovyfly.site.actions.PassThroughSiteAction">
+            <result type="tiles" name="success">faqs</result>
+        </action>
+        
+        <action name="contact" class="com.groovyfly.site.actions.ContactAction">
+            <result type="tiles" name="success">contact</result>
+        </action>
+        
+        <action name="contact-send-message" method="sendMessage" class="com.groovyfly.site.actions.ContactAction">
+            <result type="tiles" name="success">contact</result>
+            <result type="tiles" name="input">contact</result>
+        </action>
+        
+	</package>
+	
+	<package name="fishing-articles" namespace="/fishing-articles" extends="site">
+        
+        <action name="fishing-articles-homepage" class="com.groovyfly.site.actions.PassThroughSiteAction">
+            <result type="tiles" name="success">fishing-articles-homepage</result>
+        </action>
+        
+        <action name="groovy-fly-fishing-pages" class="com.groovyfly.site.actions.PassThroughSiteAction">
+            <result type="tiles" name="success">groovy-fly-fishing-pages</result>
+        </action>
+        
+    </package>
+    
+    <package name="fly-fishing-suppliers" namespace="/fly-fishing-suppliers" extends="site">
+    
+     
+        <!-- homepage and information -->
+        <action name="fly-fishing-suppliers-homepage" class="com.groovyfly.site.actions.PassThroughSiteAction">
+			<interceptor-ref name="scope">
+				<param name="session">supplierRegistrationDetails, destination</param> <!-- properties put in session scope -->
+				<param name="key">chris</param> <!-- you need this key here for some reason - find out why!!! -->
+				<param name="type">start</param>
+			</interceptor-ref>
+			<interceptor-ref name="baseSiteStack" />
+			
+            <result type="tiles" name="success">fly-fishing-suppliers-homepage</result>
+        </action>
+
+        <!-- all other form processing -->
+		<action name="fly-fishing-suppliers-form-*" method="{1}" class="springManagedSupplierFormAction">
+			<interceptor-ref name="scope">
+				<param name="session">supplierRegistrationDetails, destination</param> <!-- properties put in session scope -->
+				<param name="key">chris</param>
+			</interceptor-ref>
+			<interceptor-ref name="baseSiteStack" />
+                
+			<result type="tiles" name="input">${destination}</result>
+			<result type="tiles" name="success">${destination}</result>
+			<result type="redirect" name="none">fly-fishing-suppliers-form-complete</result>
+		</action>
+		
+		<!-- ends the process with thank you message -->
+		<action name="fly-fishing-suppliers-form-complete" method="complete" class="springManagedSupplierFormAction">
+			<interceptor-ref name="scope">
+				<param name="session">supplierRegistrationDetails, destination</param> <!-- properties put in session scope -->
+				<param name="key">chris</param>
+				<param name="type">end</param>
+			</interceptor-ref>
+			<interceptor-ref name="baseSiteStack" />
+			
+			<result type="tiles" name="input">fly-fishing-suppliers-form-step6</result>
+			<result type="tiles" name="success">fly-fishing-suppliers-form-complete</result>
+		</action>
+        
+    </package>
+
+    <!-- General actions for the site with json result types -->
+	<package name="siteJson" namespace="/" extends="json-default">
+	
+		<action name="subscriber-submit" class="springManagedNewsletterSubscribeAction">
+			<result type="json" />
+		</action>
+		
+		<action name="product-rating-submit" class="springManagedProductRatingAction">
+            <result type="json" />
+        </action>
+        
+        <action name="purchase-product-submit" class="springManagedPurchaseAction">
+            <result type="json" />
+        </action>
+        
+        <action name="modify-cart-entry-*" method="{1}" class="springManagedModifyCartEntryAction">
+            <result type="json" />
+        </action>
+		
+	</package>
+	
+</struts>

@@ -1,0 +1,5 @@
+#order-complete-message {
+	width: 500px;
+	background: transparent url('/images/green-tick.png') right center no-repeat;
+	text-align: left;
+}

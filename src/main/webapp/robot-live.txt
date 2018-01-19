@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /shop/shopping-cart-page
+Disallow: /customer-services/contact

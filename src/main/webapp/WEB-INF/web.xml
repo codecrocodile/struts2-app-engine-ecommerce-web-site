@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The web.xml, also known as the deployment descriptor, defines a Java Servlet web application. 
+		 This document is a mandatory element of any web application and must reside within WEB-INF.  The 
+		 deployment descriptor defines all the servlets and servlet filters that belong to this web
+		 application. -->
+<web-app
+        version="2.5"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"> 
+
+    <display-name>Groovy Fly</display-name>
+
+    <!-- Defines a servlet for remote access to GAE services.  As we are using Struts I have also added an exclude pattern in struts.xml
+        so that struts won't handle the call to /remote_api '-->
+	<servlet>
+		<display-name>Remote API Servlet</display-name>
+		<servlet-name>RemoteApiServlet</servlet-name>
+		<servlet-class>com.google.apphosting.utils.remoteapi.RemoteApiServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>RemoteApiServlet</servlet-name>
+		<url-pattern>/remote_api</url-pattern>
+	</servlet-mapping>
+
+    <!-- We use this package to supersede the struts2-gae-0.1.jar framework so that we can exclude some url patterns
+         such as the GAE admin console url. It seems that the framework was written for an older version of struts and
+         you could not view the admin console without doing this. We are using this framework to enable file uploads
+         using struts2 in the GAE just in case you were wondering. The default Struts2 file upload mechanism writes to the 
+         file system, which is not allowed in GAE -->
+	<filter>
+		<filter-name>struts2-gae</filter-name>
+		<filter-class>com.struts2.gae.dispatcher.GaePrepareAndExecuteFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>struts2-gae</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+  
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    
+    <!-- Disables security management for ognl as GAE will provide the security. Application will break otherwise. -->
+    <listener>
+		<listener-class>com.struts2.gae.listener.OgnlListener</listener-class>
+	</listener>
+	
+	<!-- Enables tiles to be used -->
+	<listener> 
+	   <listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class> 
+	</listener>
+	
+	<context-param>
+        <param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
+        <param-value>/WEB-INF/tiles-admin.xml,/WEB-INF/tiles-site.xml,/org/apache/tiles/classpath-defs.xml</param-value>
+    </context-param>
+	
+	<!-- Enables spring to be used -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        <!-- Default configuration file for spring container: /WEB-INF/applicationContext.xml -->
+    </listener>
+	
+    <!-- Context Configuration locations for Spring XML files -->
+	<context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>/WEB-INF/applicationContext-*.xml,classpath*:applicationContext-*.xml</param-value>
+	</context-param>
+	
+	<!--  this doesn't seem to be working in development might have to remove this (it might work live though) -->
+	<error-page>
+        <error-code>404</error-code>
+        <location>/util-pages/page-not-found.jsp</location>
+    </error-page>
+	
+<!-- 	 Authentication and Authorisation  
+	   You will need to ensure that the GAE application settings use this to authenticate against the domain.
+	   This will mean that we can control who has admin privileges -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>admin</web-resource-name><!-- added in to make valid doc 20140215 -->
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+</web-app>
+
